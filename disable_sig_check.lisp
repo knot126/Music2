@@ -1,0 +1,21 @@
+(defun patch (file pos data)
+	(let ((old-position (file-position file)))
+		(file-position file pos)
+		(write-sequence data file)
+		(file-position file old-position)
+	)
+)
+(defun main ()
+	(handler-case (let (file)
+		(setq file (open (elt *posix-argv* 1)
+			:direction :io
+			:element-type 'unsigned-byte
+			:if-exists :overwrite
+			:if-does-not-exist :error))
+		(patch file #x2496c '(#x00 #x00 #xa0 #x13))
+		(close file)
+	)
+	(error (c)
+		(format t "Got an error: ~%~a~&" c)))
+)
+(main)
