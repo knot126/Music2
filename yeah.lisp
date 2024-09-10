@@ -1,0 +1,13 @@
+(defun count-to-100 ()
+	(do ((i 1 (+ i 1))) ((> i 100) :done)
+		(format t "~a~%" i)
+	)
+)
+(defun custom-length (mylist)
+	(let ((i 0))
+		(dolist (item mylist)
+			(setf i (+ i 1))
+		)
+		i
+	)
+)
