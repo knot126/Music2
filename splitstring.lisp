@@ -1,5 +1,5 @@
 (defun split-string (str split-char)
-	(do ((items (list)) axis) ((and (eql (length str) 0) (eql axis nil)) items)
+	(do ((items (list)) (axis :uninitialised)) ((eql axis nil) items)
 		(setq axis (position split-char str :from-end t))
 		(setq items (cons
 			(subseq str (if (not (eql axis nil)) (+ axis 1) 0))
@@ -17,6 +17,7 @@
 	(print-result (split-string "asdf asdf asdf" #\ ))
 	(print-result (split-string "cats and dogs are eating my house" #\ ))\
 	(print-result (split-string "double  spaces OwO  :3" #\ ))
+	(print-result (split-string "Tripple   space :D" #\ ))
 	(print-result (split-string " at start  and end " #\ ))
 	(print-result (split-string "not@a@space@char" #\@))
 )
